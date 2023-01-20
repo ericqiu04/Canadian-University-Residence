@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
+
 //app
 const app = express()
 
@@ -20,6 +21,10 @@ mongoose.connect('mongodb+srv://Qiuser:v9dI5DM6ndEKQBx4@cluster0.dcswden.mongodb
 });
 
 
+//middleware
+app.use(morgan("dev"));
+app.use(cors())
+
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -28,6 +33,8 @@ db.once('open', function() {
 });
 
 //routes
+const testRoutes = require('./routes/test');
+app.use("/", testRoutes); 
 
 //port
 const port = process.env.PORT || 8080;
