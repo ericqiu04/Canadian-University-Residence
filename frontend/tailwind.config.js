@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -9,6 +10,10 @@ module.exports = {
         fade: 'fadeIn 3s ease-in-out',
         buttonFade: 'fadeButton 3s ease-in-out'
       },
+      backgroundImage: {
+        'home-image': "url('../pages/images/residence.jpeg')",
+      },
+
       keyframes: theme => ({
         fadeIn: {
           '0%': { color: theme('colors.transparent'), backgroundColor: theme('color.transparent')},
