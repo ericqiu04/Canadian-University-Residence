@@ -5,6 +5,7 @@ import styles from '@/styles/Home.module.css'
 import getTest from "@/pages/api/backend";
 import {useState, useEffect} from "react";
 import { HomePage} from './components/home';
+import {UniPage} from "@/pages/components/university_list";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,7 +24,7 @@ export default function Home() {
   return (
     <>
       <div>
-        <HomePage/>
+        <UniPage/>
       </div>
     </>
   )
