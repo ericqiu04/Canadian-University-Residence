@@ -1,29 +1,31 @@
 import dummy from './dummyImage.jpeg'
 import Image from "next/image";
+import {Uni} from "@/pages/components/Uni";
 import {useEffect, useState} from "react";
 export const UniPage = () => {
-    const [data, setData] = useState("Hello World");
-
+    const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/universities')
-            .then(response => response.json())
-            .then(data => setData(data.message))
-            .catch(error => console.log(error));
+        async function fetchData() {
+            const res = await fetch('http://localhost:8080/universities');
+            const newData = await res.json();
+            setData(newData.message);
+        }
+        fetchData();
     }, []);
+
     return(
 
-        <>
-
-            <div className = "flex flex-col justify-center items-center bg-white h-96">
-                <input type="search" placeholder="Search University" className = " w-2/3 xl:w-1/2 py-2 px-7 xl:py-5 xl:px-10 m-10 border-2 rounded-2xl"/>
-                <div className = "border-2 rounded-2xl xl:py-20 xl:px-20 py-5 px-20">
-                    <h2 className = "xl:text-4xl text-2xl">
-                        {data}
-                    </h2>
+        <div>
+                <div className = "flex flex-col justify-center items-center bg-white h-96">
+                    <input type="search" placeholder="Search University" className = " w-2/3 xl:w-1/2 py-2 px-7 xl:py-5 xl:px-10 m-10 border-2 rounded-2xl"/>
+                    {data.map((d) => (
+                        <Uni
+                            name = {d.name}
+                        />
+                    ))}
                 </div>
-            </div>
 
-        </>
+        </div>
     );
 }

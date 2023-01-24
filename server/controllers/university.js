@@ -15,11 +15,14 @@ exports.getUniversity = async(req, res) => {
         const university = {name: "", location: ""}
         university.name = $(el).children("a").text()
         university.location = $(el).text()
-        universities.push(university)
+        if (university.name != "") {
+            universities.push(university)
+
+        }
 
     })
     res.status(200).json({
-        message: universities[0].name,
+        message: universities,
     });
 
 }
