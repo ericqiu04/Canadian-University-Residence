@@ -17,13 +17,15 @@ export const UniPage = () => {
     return(
 
         <div>
-                <div className = "flex flex-col justify-center items-center bg-white h-96">
+                <div className = "flex flex-col justify-center items-center bg-white w-screen">
                     <input type="search" placeholder="Search University" className = " w-2/3 xl:w-1/2 py-2 px-7 xl:py-5 xl:px-10 m-10 border-2 rounded-2xl"/>
-                    {data.map((d) => (
-                        <Uni
-                            name = {d.name}
-                        />
-                    ))}
+                    <div className = "xl:grid xl:grid-cols-3 ">
+                        {data.map((d) => (
+                            <Uni
+                                name = {d.name}
+                            />
+                        ))}
+                    </div>
                 </div>
 
         </div>
