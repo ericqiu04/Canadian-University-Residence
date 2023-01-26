@@ -4,7 +4,12 @@ import {Uni} from "@/pages/components/Uni";
 import {useEffect, useState} from "react";
 export const UniPage = () => {
     const [data, setData] = useState([]);
-
+    const [inputText, setInputText] = useState("");
+    const inputHandler = (e) => {
+        //convert input text to lower case
+        var lowerCase = e.target.value.toLowerCase();
+        setInputText(lowerCase);
+    };
     useEffect(() => {
         async function fetchData() {
             const res = await fetch('http://localhost:8080/universities');
@@ -18,10 +23,11 @@ export const UniPage = () => {
 
         <div>
                 <div className = "flex flex-col justify-center items-center bg-white w-screen">
-                    <input type="search" placeholder="Search University" className = " w-2/3 xl:w-1/2 py-2 px-7 xl:py-5 xl:px-10 m-10 border-2 rounded-2xl"/>
+                    <input onChange = {inputHandler} type="search" placeholder="Search University" className = " w-2/3 xl:w-1/2 py-2 px-7 xl:py-5 xl:px-10 m-10 border-2 rounded-2xl"/>
                     <div className = "xl:grid xl:grid-cols-3 ">
                         {data.map((d) => (
                             <Uni
+                                input = {inputText}
                                 name = {d.name}
                             />
                         ))}
