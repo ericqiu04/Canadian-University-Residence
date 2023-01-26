@@ -19,13 +19,24 @@ export const UniPage = () => {
         fetchData();
     }, []);
 
+    const filteredData = data.filter((el) => {
+        //if no input the return the original
+        if (inputText === '') {
+            return el;
+        }
+        //return the item which contains the user input
+        else {
+            return el.name.toLowerCase().includes(inputText)
+        }
+    })
+
     return(
 
         <div>
                 <div className = "flex flex-col justify-center items-center bg-white w-screen">
                     <input onChange = {inputHandler} type="search" placeholder="Search University" className = " w-2/3 xl:w-1/2 py-2 px-7 xl:py-5 xl:px-10 m-10 border-2 rounded-2xl"/>
                     <div className = "xl:grid xl:grid-cols-3 ">
-                        {data.map((d) => (
+                        {filteredData.map((d) => (
                             <Uni
                                 input = {inputText}
                                 name = {d.name}
